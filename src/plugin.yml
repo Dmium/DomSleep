@@ -1,0 +1,9 @@
+name: DomSleep
+version: 0.0.1
+author: Dmium
+main: com.dmium.plugins.domsleep.DomSleep
+api-version: 1.15
+commands:
+  domsleep:
+    description: Displays info about domsleep
+    usage: /<command>

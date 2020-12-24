@@ -1,5 +1,6 @@
 package com.dmium.plugins.domsleep;
 
+import org.bukkit.World;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,7 +24,7 @@ public class SleepListener implements Listener {
         if(!event.isCancelled()) {
             sleepyPlayers.add(event.getPlayer().getUniqueId());
             broadcastMessage("[DomSleep]: Player " + event.getPlayer().getDisplayName() + " has gone to bed!");
-            broadcastMessage("[DomSleep]: (" + sleepyPlayers.size() + "/" + getOnlinePlayers().size() + ") players are sleeping");
+            broadcastMessage("[DomSleep]: (" + sleepyPlayers.size() + "/" + getOverworldPlayers() + ") players are sleeping");
         }
     }
 
@@ -42,5 +43,9 @@ public class SleepListener implements Listener {
             broadcastMessage("[DomSleep]: Player " + event.getPlayer().getDisplayName() + " has got out of bed!");
             broadcastMessage("[DomSleep]: (" + sleepyPlayers.size() + "/" + getOnlinePlayers().size() + ") players are sleeping");
         }
+    }
+
+    private long getOverworldPlayers() {
+        return getOnlinePlayers().stream().filter(player -> player.getWorld().getEnvironment().equals(World.Environment.NORMAL)).count();
     }
 }
